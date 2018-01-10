@@ -1,0 +1,12 @@
+schema {
+    query: Query
+}
+type Query {
+    questions: [Question]
+}
+
+type Question {
+    id: Int
+    prompt: String
+    responseType: String
+}
