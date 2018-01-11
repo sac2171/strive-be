@@ -1,12 +1,31 @@
 schema {
     query: Query
+    mutation: Mutation
 }
+
 type Query {
     questions: [Question]
+}
+
+type Mutation {
+	submitAnswer(input: AnswerInput): Answer
 }
 
 type Question {
     id: Int
     prompt: String
     responseType: String
+}
+
+type Answer {
+	id: Int
+	questionId: Int
+	examId: Int
+	response: String
+}
+
+input AnswerInput {
+	questionId: Int
+	examId: Int
+	response: String
 }

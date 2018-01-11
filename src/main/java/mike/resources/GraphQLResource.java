@@ -30,7 +30,7 @@ public class GraphQLResource {
     public Map<String, Object> execute(GraphQLRequest graphQLRequest){
         ImmutableMap.Builder<String, Object> contextBuilder = new ImmutableMap.Builder<String, Object>();
         ImmutableMap<String, Object> context = contextBuilder.build();
-        ExecutionResult executionResult = graphQL.execute(graphQLRequest.getQuery());
+        ExecutionResult executionResult = graphQL.execute(graphQLRequest.getQuery(), context, graphQLRequest.getVariables());
         Map<String, Object> result = new LinkedHashMap<String, Object>();
 
         result.put("data", executionResult.getData());
@@ -40,7 +40,7 @@ public class GraphQLResource {
 
     static class GraphQLRequest{
         private String query;
-        private String variables;
+        private Map<String, Object> variables;
 
         String getQuery() {
             return query;
@@ -50,11 +50,11 @@ public class GraphQLResource {
             this.query = query;
         }
 
-        String getVariables() {
+        Map<String, Object>  getVariables() {
             return variables;
         }
 
-        public void setVariables(String variables) {
+        public void setVariables(Map<String, Object>  variables) {
             this.variables = variables;
         }
     }

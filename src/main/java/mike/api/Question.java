@@ -2,11 +2,7 @@ package mike.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "questions")
@@ -16,6 +12,7 @@ import javax.persistence.Table;
 })
 public class Question {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String prompt;
     private String responseType;

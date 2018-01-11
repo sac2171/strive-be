@@ -11,8 +11,11 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import mike.api.Answer;
 import mike.api.Question;
+import mike.dao.AnswerDao;
 import mike.dao.QuestionDao;
+import mike.fetchers.SubmitAnswerMutation;
 import mike.fetchers.QuestionsFetcher;
 import mike.resources.GraphQLResource;
 
@@ -44,6 +47,7 @@ public class mikeApplication extends Application<mikeConfiguration> {
                     final Environment environment) {
 
         final QuestionDao questionDao = new QuestionDao(hibernate.getSessionFactory());
+        final AnswerDao answerDao = new AnswerDao(hibernate.getSessionFactory());
 
         SchemaParser schemaParser = new SchemaParser();
         InputStream in = getClass().getClassLoader().getResourceAsStream("schema.graphqls");
@@ -52,6 +56,8 @@ public class mikeApplication extends Application<mikeConfiguration> {
 
         RuntimeWiring runtimeWiring = newRuntimeWiring()
                 .type("Query", builder -> builder.dataFetcher("questions", new QuestionsFetcher(questionDao)))
+                .type("Mutation", builder -> builder
+                        .dataFetcher("submitAnswer" , new SubmitAnswerMutation(answerDao)))
                 .build();
 
         SchemaGenerator schemaGenerator = new SchemaGenerator();
@@ -63,7 +69,7 @@ public class mikeApplication extends Application<mikeConfiguration> {
         environment.jersey().register(resource);
     }
 
-    private final HibernateBundle<mikeConfiguration> hibernate = new HibernateBundle<mikeConfiguration>(Question.class) {
+    private final HibernateBundle<mikeConfiguration> hibernate = new HibernateBundle<mikeConfiguration>(Question.class, Answer.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(mikeConfiguration configuration) {
             return configuration.getDataSourceFactory();
