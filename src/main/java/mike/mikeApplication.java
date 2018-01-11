@@ -9,6 +9,7 @@ import graphql.schema.idl.TypeDefinitionRegistry;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import mike.api.Answer;
@@ -39,7 +40,14 @@ public class mikeApplication extends Application<mikeConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<mikeConfiguration> bootstrap) {
+
         bootstrap.addBundle(hibernate);
+        bootstrap.addBundle(new MigrationsBundle<mikeConfiguration>() {
+            @Override
+            public DataSourceFactory getDataSourceFactory(mikeConfiguration configuration) {
+                return configuration.getDataSourceFactory();
+            }
+        });
     }
 
     @Override
