@@ -17,6 +17,6 @@ public class SubmitAnswerMutation implements DataFetcher {
     @Override
     public Answer get(DataFetchingEnvironment env) {
         Map<String, Object> input  = env.getArgument("input");
-        return answerDao.insert((Integer) input.get("questionId"), (Integer) input.get("examId"), (String) input.get("response"));
+        return answerDao.insert((Integer) input.get("questionId"), (Integer) input.get("testId"), (String) input.get("response"));
     }
 }

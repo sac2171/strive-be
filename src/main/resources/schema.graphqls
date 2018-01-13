@@ -5,10 +5,20 @@ schema {
 
 type Query {
     questions: [Question]
+    tests: [Test]
 }
 
 type Mutation {
 	submitAnswer(input: AnswerInput): Answer
+	addUser(input: UserInput): User
+	newTest(userId: Int): Test
+}
+
+type Test {
+	id: Int
+	userId: Int
+	user: User
+	answers: [Answer]
 }
 
 type Question {
@@ -20,12 +30,26 @@ type Question {
 type Answer {
 	id: Int
 	questionId: Int
-	examId: Int
+	testId: Int
 	response: String
+	question: Question
 }
 
 input AnswerInput {
 	questionId: Int
-	examId: Int
+	testId: Int
 	response: String
+}
+
+type User {
+	id: Int
+	firstName: String
+	lastName: String
+	email: String
+}
+
+input UserInput {
+	firstName: String
+    lastName: String
+    email: String
 }

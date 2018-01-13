@@ -7,11 +7,11 @@ import mike.dao.QuestionDao;
 
 import java.util.List;
 
-public class QuestionsFetcher implements DataFetcher {
+public class QuestionsQuery implements DataFetcher {
 
     private QuestionDao questionDao;
 
-    public QuestionsFetcher(QuestionDao questionDao) {
+    public QuestionsQuery(QuestionDao questionDao) {
         this.questionDao = questionDao;
     }
 

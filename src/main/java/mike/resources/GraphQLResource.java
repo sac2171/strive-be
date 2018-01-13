@@ -34,13 +34,24 @@ public class GraphQLResource {
         Map<String, Object> result = new LinkedHashMap<String, Object>();
 
         result.put("data", executionResult.getData());
-        result.put("errors", executionResult.getErrors());
+        if(!executionResult.getErrors().isEmpty()){
+            result.put("errors", executionResult.getErrors());
+        }
         return result;
     }
 
     static class GraphQLRequest{
+        private String operationName;
         private String query;
         private Map<String, Object> variables;
+
+        public String getOperationName() {
+            return operationName;
+        }
+
+        public void setOperationName(String operationName) {
+            this.operationName = operationName;
+        }
 
         String getQuery() {
             return query;

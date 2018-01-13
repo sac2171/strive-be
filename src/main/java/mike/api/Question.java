@@ -3,6 +3,7 @@ package mike.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "questions")
@@ -36,8 +37,18 @@ public class Question {
         return prompt;
     }
 
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
+    }
+
     @JsonProperty
     public String getResponseType() {
         return responseType;
     }
+
+
+    public void setResponseType(String responseType) {
+        this.responseType = responseType;
+    }
+
 }

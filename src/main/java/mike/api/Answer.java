@@ -11,15 +11,23 @@ public class Answer {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private long questionId;
-    private long examId;
+    private long testId;
     private String response;
+
+    @ManyToOne
+    @JoinColumn(name="testid", nullable=false)
+    private Test test;
+
+    @ManyToOne
+    @JoinColumn(name="questionid", nullable=false)
+    private Question question;
 
     public Answer() {
     }
 
-    public Answer(long questionId, long examId, String response) {
+    public Answer(long questionId, long testId, String response) {
         this.questionId = questionId;
-        this.examId = examId;
+        this.testId = testId;
         this.response = response;
     }
 
@@ -38,12 +46,12 @@ public class Answer {
     }
 
     @JsonProperty
-    public long getExamId() {
-        return examId;
+    public long getTestId() {
+        return testId;
     }
 
-    public void setExamId(long examId) {
-        this.examId = examId;
+    public void setTestId(long testId) {
+        this.testId = testId;
     }
 
     @JsonProperty
@@ -53,5 +61,23 @@ public class Answer {
 
     public void setResponse(String response) {
         this.response = response;
+    }
+
+    @JsonProperty
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
+    @JsonProperty
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 }
