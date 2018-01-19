@@ -1,7 +1,7 @@
-package mike.dao;
+package strive.dao;
 
 import io.dropwizard.hibernate.AbstractDAO;
-import mike.api.Test;
+import strive.api.Test;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -16,7 +16,13 @@ public class TestDao extends AbstractDAO<Test> {
         return persist(test);
     }
 
+    public Test grade(Integer testId, Integer grade){
+        Test test = get(testId.longValue());
+        test.setGrade(grade);
+        return persist(test);
+    }
+
     public List<Test> findAll() {
-        return list(namedQuery("mike.api.Test.findAll"));
+        return list(namedQuery("strive.api.Test.findAll"));
     }
 }

@@ -1,7 +1,7 @@
-package mike.dao;
+package strive.dao;
 
 import io.dropwizard.hibernate.AbstractDAO;
-import mike.api.User;
+import strive.api.User;
 import org.hibernate.SessionFactory;
 
 public class UserDao extends AbstractDAO<User> {

@@ -1,8 +1,8 @@
-package mike.fetchers;
+package strive.fetchers;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
-import mike.dao.TestDao;
+import strive.dao.TestDao;
 
 public class NewTestMutation implements DataFetcher {
 

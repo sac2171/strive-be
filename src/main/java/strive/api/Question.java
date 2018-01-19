@@ -1,4 +1,4 @@
-package mike.api;
+package strive.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "questions")
 @NamedQueries({
-        @NamedQuery(name = "mike.api.Question.findAll",
+        @NamedQuery(name = "strive.api.Question.findAll",
                 query = "select q from Question q"),
 })
 public class Question {

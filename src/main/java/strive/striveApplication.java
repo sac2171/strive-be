@@ -1,4 +1,4 @@
-package mike;
+package strive;
 
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
@@ -12,16 +12,16 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import mike.api.Answer;
-import mike.api.Question;
-import mike.api.Test;
-import mike.api.User;
-import mike.dao.AnswerDao;
-import mike.dao.QuestionDao;
-import mike.dao.TestDao;
-import mike.dao.UserDao;
-import mike.fetchers.*;
-import mike.resources.GraphQLResource;
+import strive.api.Answer;
+import strive.api.Question;
+import strive.api.Test;
+import strive.api.User;
+import strive.dao.AnswerDao;
+import strive.dao.QuestionDao;
+import strive.dao.TestDao;
+import strive.dao.UserDao;
+import strive.fetchers.*;
+import strive.resources.GraphQLResource;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 
 import javax.servlet.DispatcherType;
@@ -34,40 +34,40 @@ import java.util.stream.Collectors;
 
 import static graphql.schema.idl.RuntimeWiring.newRuntimeWiring;
 
-public class mikeApplication extends Application<mikeConfiguration> {
+public class striveApplication extends Application<striveConfiguration> {
 
     public static void main(final String[] args) throws Exception {
-        new mikeApplication().run(args);
+        new striveApplication().run(args);
     }
 
     @Override
     public String getName() {
-        return "mike";
+        return "Strive";
     }
 
     @Override
-    public void initialize(final Bootstrap<mikeConfiguration> bootstrap) {
+    public void initialize(final Bootstrap<striveConfiguration> bootstrap) {
 
         bootstrap.addBundle(hibernate);
-        bootstrap.addBundle(new MigrationsBundle<mikeConfiguration>() {
+        bootstrap.addBundle(new MigrationsBundle<striveConfiguration>() {
             @Override
-            public DataSourceFactory getDataSourceFactory(mikeConfiguration configuration) {
+            public DataSourceFactory getDataSourceFactory(striveConfiguration configuration) {
                 return configuration.getDataSourceFactory();
             }
         });
     }
 
     @Override
-    public void run(final mikeConfiguration configuration,
+    public void run(final striveConfiguration configuration,
                     final Environment environment) {
         configureCors(environment);
         configureGraphQl(environment);
 
     }
 
-    private final HibernateBundle<mikeConfiguration> hibernate = new HibernateBundle<mikeConfiguration>(Question.class, Answer.class, Test.class, User.class) {
+    private final HibernateBundle<striveConfiguration> hibernate = new HibernateBundle<striveConfiguration>(Question.class, Answer.class, Test.class, User.class) {
         @Override
-        public DataSourceFactory getDataSourceFactory(mikeConfiguration configuration) {
+        public DataSourceFactory getDataSourceFactory(striveConfiguration configuration) {
             return configuration.getDataSourceFactory();
         }
     };
@@ -92,6 +92,7 @@ public class mikeApplication extends Application<mikeConfiguration> {
                         .dataFetcher("submitAnswer" , new SubmitAnswerMutation(answerDao))
                         .dataFetcher("addUser" , new AddUserMutation(userDao))
                         .dataFetcher("newTest" , new NewTestMutation(testDao))
+                        .dataFetcher("gradeTest" , new GradeTestMutation(testDao))
                 )
 
                 .build();

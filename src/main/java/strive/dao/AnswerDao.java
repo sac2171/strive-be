@@ -1,7 +1,7 @@
-package mike.dao;
+package strive.dao;
 
 import io.dropwizard.hibernate.AbstractDAO;
-import mike.api.Answer;
+import strive.api.Answer;
 
 import org.hibernate.SessionFactory;
 

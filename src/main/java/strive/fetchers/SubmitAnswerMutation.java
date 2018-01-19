@@ -1,9 +1,9 @@
-package mike.fetchers;
+package strive.fetchers;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
-import mike.api.Answer;
-import mike.dao.AnswerDao;
+import strive.api.Answer;
+import strive.dao.AnswerDao;
 
 import java.util.Map;
 

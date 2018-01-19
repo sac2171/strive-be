@@ -1,4 +1,4 @@
-package mike.resources;
+package strive.resources;
 
 import com.google.common.collect.ImmutableMap;
 import graphql.ExecutionResult;

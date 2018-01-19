@@ -12,6 +12,7 @@ type Mutation {
 	submitAnswer(input: AnswerInput): Answer
 	addUser(input: UserInput): User
 	newTest(userId: Int): Test
+	gradeTest(input: TestInput): Test
 }
 
 type Test {
@@ -19,6 +20,12 @@ type Test {
 	userId: Int
 	user: User
 	answers: [Answer]
+	grade: Int
+}
+
+input TestInput {
+	id: Int
+	grade: Int
 }
 
 type Question {

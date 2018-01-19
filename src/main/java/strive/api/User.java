@@ -1,4 +1,4 @@
-package mike.api;
+package strive.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

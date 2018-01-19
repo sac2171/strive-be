@@ -1,7 +1,7 @@
-package mike.dao;
+package strive.dao;
 
 import io.dropwizard.hibernate.AbstractDAO;
-import mike.api.Question;
+import strive.api.Question;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -12,6 +12,6 @@ public class QuestionDao extends AbstractDAO<Question> {
     }
 
     public List<Question> findAll() {
-        return list(namedQuery("mike.api.Question.findAll"));
+        return list(namedQuery("strive.api.Question.findAll"));
     }
 }

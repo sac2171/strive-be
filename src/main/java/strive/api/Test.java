@@ -1,4 +1,4 @@
-package mike.api;
+package strive.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "tests")
 @NamedQueries({
-        @NamedQuery(name = "mike.api.Test.findAll",
+        @NamedQuery(name = "strive.api.Test.findAll",
                 query = "select t from Test t"),
 })
 public class Test {
@@ -16,6 +16,7 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long userId;
+    private Integer grade;
 
     @ManyToOne
     @JoinColumn(name="userid", nullable=false, insertable=false, updatable=false)
@@ -61,5 +62,14 @@ public class Test {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    @JsonProperty
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 }

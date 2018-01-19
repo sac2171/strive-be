@@ -1,12 +1,41 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="mike.abell (generated)" id="1515609891831-1">
+    <changeSet author="strive (generated)" id="1516337785821-1">
+        <createTable catalogName="strive" schemaName="public" tableName="answers">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="answers_pkey"/>
+            </column>
+            <column name="questionid" type="INT"/>
+            <column name="testid" type="INT"/>
+            <column name="response" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="strive (generated)" id="1516337785821-2">
         <createTable catalogName="strive" schemaName="public" tableName="questions">
             <column autoIncrement="true" name="id" type="SERIAL">
                 <constraints primaryKey="true" primaryKeyName="questions_pkey"/>
             </column>
             <column name="prompt" type="TEXT"/>
             <column name="responsetype" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="strive (generated)" id="1516337785821-3">
+        <createTable catalogName="strive" schemaName="public" tableName="tests">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tests_pkey"/>
+            </column>
+            <column name="userid" type="INT"/>
+            <column name="grade" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="strive (generated)" id="1516337785821-4">
+        <createTable catalogName="strive" schemaName="public" tableName="users">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="firstname" type="TEXT"/>
+            <column name="lastname" type="TEXT"/>
+            <column name="email" type="TEXT"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
