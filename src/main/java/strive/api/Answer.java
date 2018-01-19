@@ -15,11 +15,11 @@ public class Answer {
     private String response;
 
     @ManyToOne
-    @JoinColumn(name="testid", nullable=false)
+    @JoinColumn(name="testid", nullable=false, insertable=false, updatable=false)
     private Test test;
 
     @ManyToOne
-    @JoinColumn(name="questionid", nullable=false)
+    @JoinColumn(name="questionid", nullable=false, insertable=false, updatable=false)
     private Question question;
 
     public Answer() {
